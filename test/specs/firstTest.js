@@ -40,6 +40,7 @@ describe('Ecommerce application', ()=> {
         browser.waitUntil(() => navBar.isDisplayed(),{
             timeout:10000, timeoutMsg:"NAVBAR"
         } )
+        
         expect(browser).toHaveTitleContaining("ProtoCommerce")
     })
 })
