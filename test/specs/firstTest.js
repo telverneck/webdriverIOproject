@@ -31,16 +31,36 @@ describe('Ecommerce application', ()=> {
         const passwordText = $("#password")
         const loginButton = $("#signInBtn")
         const navBar = $("div#navbarResponsive") 
+        const adminCheckbox = $("label.customradio input[value=admin]") 
+        const userCheckbox = $("label.customradio input[value=user]") 
+        const popUpOkButton = $("#okayBtn") 
+        const popUpCancelButton = $("#cancelBtn") 
+        const formSelect = $("select.form-control")
+
+
 
         
         loginText.setValue("rahulshettyacademy")
         passwordText.setValue("learning")
-        loginButton.click()       
+         
+        adminCheckbox.click()     
+        userCheckbox.click()     
+        popUpCancelButton.click() 
 
-        browser.waitUntil(() => navBar.isDisplayed(),{
-            timeout:10000, timeoutMsg:"NAVBAR"
+        browser.waitUntil(() => userCheckbox.isSelected() === false,{
+            timeout:4000, timeoutMsg:"User radio is selected"
         } )
-        
+        userCheckbox.click() 
+        popUpOkButton.click()     
+
+        expect(popUpOkButton).not.toBeDisplayed()
+
+        formSelect.selectByAttribute("value","consult")
+        loginButton.click() 
+
+    
+        navBar.waitForExist()
+
         expect(browser).toHaveTitleContaining("ProtoCommerce")
     })
 })
